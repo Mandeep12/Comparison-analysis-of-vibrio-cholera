@@ -1,0 +1,23 @@
+use strict;  
+use warnings;   
+  
+@ARGV =  ('a,b|c', 'c,d|e', 'a,d|e') unless @ARGV;   
+  
+my %HoA;  
+foreach ( @ARGV ) {  
+    m/^([a-z])[,]([a-z])[|]([a-z])$/ ;  
+    push @{$HoA{$1}}, $2;  
+}  
+print "\n===========\@HoA=====\n";  
+print "from->to\n";  
+while (my ($key, $values) = each %HoA) {  
+    print $key, "=>   [", join(',', @$values), "]\n";  
+}   
+ 
+-----------OUTPUT---------- 
+[hzing@localhost perl]$ perl input.pl  
+ 
+===========@HoA===== 
+from->to 
+c=>   [d] 
+a=>   [b,d]
